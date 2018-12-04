@@ -10,7 +10,7 @@ import com.robbie.flashboard.R
 
 import com.robbie.flashboard.board.dummy.DummyContent.DummyItem
 
-import kotlinx.android.synthetic.main.fragment_item.view.*
+import kotlinx.android.synthetic.main.item_board_list.view.*
 
 class BoardRecyclerViewAdapter(
         private val mValues: List<DummyItem>)
@@ -26,13 +26,12 @@ class BoardRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.fragment_item, parent, false)
+                .inflate(R.layout.item_board_list, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
-        holder.mIdView.text = item.id
         holder.mContentView.text = item.content
 
         with(holder.mView) {
@@ -44,8 +43,7 @@ class BoardRecyclerViewAdapter(
     override fun getItemCount(): Int = mValues.size
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView = mView.item_number
-        val mContentView: TextView = mView.content
+        val mContentView: TextView = mView.tv_content
 
         override fun toString(): String {
             return super.toString() + " '" + mContentView.text + "'"
