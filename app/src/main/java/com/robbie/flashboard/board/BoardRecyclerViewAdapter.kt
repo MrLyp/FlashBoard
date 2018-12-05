@@ -1,5 +1,7 @@
 package com.robbie.flashboard.board
 
+import android.app.Activity
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +15,7 @@ import com.robbie.flashboard.board.dummy.DummyContent.DummyItem
 import kotlinx.android.synthetic.main.item_board_list.view.*
 
 class BoardRecyclerViewAdapter(
+        private val mActivity: Activity?,
         private val mValues: List<DummyItem>)
     : RecyclerView.Adapter<BoardRecyclerViewAdapter.ViewHolder>() {
 
@@ -21,6 +24,8 @@ class BoardRecyclerViewAdapter(
     init {
         mOnClickListener = View.OnClickListener { v ->
             val item = v.tag as DummyItem
+            val intent = Intent(mActivity, item.clz)
+            mActivity?.startActivity(intent)
         }
     }
 
@@ -32,7 +37,7 @@ class BoardRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
-        holder.mContentView.text = item.content
+        holder.mContentView.text = item.name
 
         with(holder.mView) {
             tag = item

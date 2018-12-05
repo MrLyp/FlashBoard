@@ -1,6 +1,7 @@
 package com.robbie.flashboard.board
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
@@ -38,9 +39,10 @@ class BoardFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = BoardRecyclerViewAdapter(DummyContent.ITEMS)
+                adapter = BoardRecyclerViewAdapter(activity, DummyContent.ITEMS)
             }
         }
+        startActivity(Intent())
         return view
     }
 
