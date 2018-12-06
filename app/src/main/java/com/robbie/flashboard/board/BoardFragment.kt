@@ -14,11 +14,6 @@ import com.robbie.flashboard.R
 
 import com.robbie.flashboard.board.dummy.DummyContent
 
-/**
- * A fragment representing a list of Items.
- * Activities containing this fragment MUST implement the
- * [BoardFragment.OnListFragmentInteractionListener] interface.
- */
 class BoardFragment : Fragment() {
 
     private var columnCount = 2
@@ -30,19 +25,14 @@ class BoardFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_board, container, false)
+        val view: RecyclerView = inflater.inflate(R.layout.fragment_board, container, false) as RecyclerView
 
         // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
-                adapter = BoardRecyclerViewAdapter(activity, DummyContent.ITEMS)
-            }
+        view.layoutManager = when {
+            columnCount <= 1 -> LinearLayoutManager(context)
+            else -> GridLayoutManager(context, columnCount)
         }
-        startActivity(Intent())
+        view.adapter = BoardRecyclerViewAdapter(activity, DummyContent.ITEMS)
         return view
     }
 
