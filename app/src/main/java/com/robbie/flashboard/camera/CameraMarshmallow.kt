@@ -18,7 +18,7 @@ class CameraMarshmallow : ICamera {
         return try {
             mCameraManager.setTorchMode(mCameraID, enable)
             true
-        } catch (e: CameraAccessException) {
+        } catch (e: Throwable) {
             e.printStackTrace()
             false
         }

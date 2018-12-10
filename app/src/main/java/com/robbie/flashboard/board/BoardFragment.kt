@@ -25,15 +25,20 @@ class BoardFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view: RecyclerView = inflater.inflate(R.layout.fragment_board, container, false) as RecyclerView
+        return inflater.inflate(R.layout.fragment_board, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val listView: RecyclerView = view.findViewById(R.id.list) as RecyclerView
 
         // Set the adapter
-        view.layoutManager = when {
+        listView.layoutManager = when {
             columnCount <= 1 -> LinearLayoutManager(context)
             else -> GridLayoutManager(context, columnCount)
         }
-        view.adapter = BoardRecyclerViewAdapter(activity, DummyContent.ITEMS)
-        return view
+        listView.addItemDecoration(SpaceDecoration(resources.getDimensionPixelSize(R.dimen.list_item_spacing)))
+        listView.adapter = BoardRecyclerViewAdapter(activity, DummyContent.ITEMS)
     }
 
     override fun onAttach(context: Context) {

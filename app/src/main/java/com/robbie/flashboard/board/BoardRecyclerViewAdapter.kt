@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.robbie.flashboard.R
 
@@ -38,6 +39,7 @@ class BoardRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
         holder.mContentView.text = item.name
+        holder.mIconView.setImageResource(item.resId)
 
         with(holder.mView) {
             tag = item
@@ -49,6 +51,7 @@ class BoardRecyclerViewAdapter(
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val mContentView: TextView = mView.tv_content
+        val mIconView: ImageView = mView.iv_icon
 
         override fun toString(): String {
             return super.toString() + " '" + mContentView.text + "'"
